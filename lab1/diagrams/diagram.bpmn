@@ -59,10 +59,10 @@
     <bpmn:sequenceFlow id="Flow_0aec8zc" name="Да" sourceRef="Gateway_11ssw23" targetRef="Activity_077p6vj" />
     <bpmn:sequenceFlow id="Flow_11o140y" name="Нет" sourceRef="Gateway_11ssw23" targetRef="Activity_1mhxv6s" />
     <bpmn:task id="Activity_0ywudun" name="Подтвердить заказ и передать на кухню">
-      <bpmn:incoming>Flow_0aofq84</bpmn:incoming>
+      <bpmn:incoming>Flow_0rnutqt</bpmn:incoming>
       <bpmn:outgoing>Flow_0u9or6v</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:sequenceFlow id="Flow_0aofq84" sourceRef="Activity_077p6vj" targetRef="Activity_0ywudun" />
+    <bpmn:sequenceFlow id="Flow_0aofq84" sourceRef="Activity_077p6vj" targetRef="Activity_1uk6omr" />
     <bpmn:sequenceFlow id="Flow_0u9or6v" sourceRef="Activity_0ywudun" targetRef="Gateway_08ri9g7" />
     <bpmn:parallelGateway id="Gateway_08ri9g7">
       <bpmn:incoming>Flow_0u9or6v</bpmn:incoming>
@@ -105,6 +105,11 @@
       <bpmn:incoming>Flow_1rlnn9f</bpmn:incoming>
     </bpmn:intermediateThrowEvent>
     <bpmn:sequenceFlow id="Flow_1rlnn9f" sourceRef="Activity_1hgljgl" targetRef="Event_024jj3v" />
+    <bpmn:task id="Activity_1uk6omr" name="Уточнить детали по телефону">
+      <bpmn:incoming>Flow_0aofq84</bpmn:incoming>
+      <bpmn:outgoing>Flow_0rnutqt</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_0rnutqt" sourceRef="Activity_1uk6omr" targetRef="Activity_0ywudun" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1oz8zrh">
@@ -139,7 +144,7 @@
       <bpmndi:BPMNShape id="Gateway_0prnzvs_di" bpmnElement="Gateway_0prnzvs" isMarkerVisible="true">
         <dc:Bounds x="1025" y="345" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1011" y="402" width="79" height="14" />
+          <dc:Bounds x="1010" y="393" width="79" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0bfpvcl_di" bpmnElement="Activity_0bfpvcl">
@@ -191,6 +196,10 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="2085" y="535" width="51" height="27" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1uk6omr_di" bpmnElement="Activity_1uk6omr">
+        <dc:Bounds x="1030" y="470" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0m36b44_di" bpmnElement="Flow_0m36b44">
         <di:waypoint x="208" y="370" />
@@ -263,8 +272,9 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0aofq84_di" bpmnElement="Flow_0aofq84">
-        <di:waypoint x="1230" y="410" />
-        <di:waypoint x="1230" y="470" />
+        <di:waypoint x="1186" y="409" />
+        <di:waypoint x="1080" y="409" />
+        <di:waypoint x="1080" y="470" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0u9or6v_di" bpmnElement="Flow_0u9or6v">
         <di:waypoint x="1280" y="510" />
@@ -305,6 +315,10 @@
       <bpmndi:BPMNEdge id="Flow_1rlnn9f_di" bpmnElement="Flow_1rlnn9f">
         <di:waypoint x="2040" y="510" />
         <di:waypoint x="2092" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0rnutqt_di" bpmnElement="Flow_0rnutqt">
+        <di:waypoint x="1130" y="510" />
+        <di:waypoint x="1180" y="510" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
