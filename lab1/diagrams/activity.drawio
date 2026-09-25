@@ -34,11 +34,14 @@
         <mxCell id="merge" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="" vertex="1">
           <mxGeometry height="40" width="40" x="1100" y="65" as="geometry" />
         </mxCell>
+        <mxCell id="-oT3KhGdCLu5c2Ns7sVF-5" edge="1" parent="1" source="a5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="-oT3KhGdCLu5c2Ns7sVF-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="a5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Отправить уведомление о&#xa;новом заказе администратору" vertex="1">
           <mxGeometry height="70" width="220" x="1190" y="50" as="geometry" />
         </mxCell>
         <mxCell id="final" parent="1" style="shape=doubleEllipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
-          <mxGeometry height="30" width="30" x="1460" y="70" as="geometry" />
+          <mxGeometry height="30" width="30" x="1525" y="180" as="geometry" />
         </mxCell>
         <mxCell id="e1" edge="1" parent="1" source="start" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="a1">
           <mxGeometry relative="1" as="geometry" />
@@ -92,11 +95,14 @@
         <mxCell id="e12" edge="1" parent="1" source="merge" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="a5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e13" edge="1" parent="1" source="a5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="final">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
         <mxCell id="-oT3KhGdCLu5c2Ns7sVF-3" edge="1" parent="1" source="start" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;innerLoopWaypoints=1;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="start">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-oT3KhGdCLu5c2Ns7sVF-6" edge="1" parent="1" source="-oT3KhGdCLu5c2Ns7sVF-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="final">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-oT3KhGdCLu5c2Ns7sVF-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Передать заказ на кухню" vertex="1">
+          <mxGeometry height="60" width="120" x="1480" y="55" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
