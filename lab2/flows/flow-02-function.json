@@ -1,0 +1,76 @@
+[
+    {
+        "id": "5af4363cb5e925f4",
+        "type": "tab",
+        "label": "Поток 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c0c617c6eade4779",
+        "type": "inject",
+        "z": "5af4363cb5e925f4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[10, 15, 20, 25, 30]",
+        "payloadType": "json",
+        "x": 90,
+        "y": 320,
+        "wires": [
+            [
+                "056e5865386dab65"
+            ]
+        ]
+    },
+    {
+        "id": "056e5865386dab65",
+        "type": "function",
+        "z": "5af4363cb5e925f4",
+        "name": "function 1",
+        "func": "let inputNumbers = msg.payload;\nif (!Array.isArray(inputNumbers)) {\n    inputNumbers = [5, 12, 18, 22, 33];\n}\n\nlet sum = 0;\nlet evens = [];\n\nfor (let i = 0; i < inputNumbers.length; i++) {\n    let num = inputNumbers[i];\n    sum += num;\n    if (num % 2 === 0) {\n        evens.push(num);\n    }\n}\n\nmsg.payload = {\n    student: \"Пильтицкая СДП-ИИ-241\",\n    totalSum: sum,\n    evenNumbers: evens,\n    count: inputNumbers.length\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 320,
+        "wires": [
+            [
+                "1281e265a486cee7"
+            ]
+        ]
+    },
+    {
+        "id": "1281e265a486cee7",
+        "type": "debug",
+        "z": "5af4363cb5e925f4",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 320,
+        "wires": []
+    }
+]

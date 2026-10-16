@@ -1,0 +1,131 @@
+[
+    {
+        "id": "0265592cf75c60b1",
+        "type": "tab",
+        "label": "Поток 11",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "inject_write",
+        "type": "inject",
+        "z": "0265592cf75c60b1",
+        "name": "Write Data",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 280,
+        "wires": [
+            [
+                "func_prepare_data"
+            ]
+        ]
+    },
+    {
+        "id": "func_prepare_data",
+        "type": "function",
+        "z": "0265592cf75c60b1",
+        "name": "Prepare Data (JSON)",
+        "func": "msg.payload = {\n    student: \"Piltitskaya\",\n    lab: \"2.11\",\n    timestamp: new Date().toISOString(),\n    message: \"Persistent data check successfully passed!\"\n};\n// Превращаем объект в красивую JSON-строку\nmsg.payload = JSON.stringify(msg.payload, null, 4);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 280,
+        "wires": [
+            [
+                "file_out_node"
+            ]
+        ]
+    },
+    {
+        "id": "file_out_node",
+        "type": "file",
+        "z": "0265592cf75c60b1",
+        "name": "Save to File",
+        "filename": "lab2_data.json",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 730,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "inject_read",
+        "type": "inject",
+        "z": "0265592cf75c60b1",
+        "name": "Read Data",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 390,
+        "wires": [
+            [
+                "file_in_node"
+            ]
+        ]
+    },
+    {
+        "id": "file_in_node",
+        "type": "file in",
+        "z": "0265592cf75c60b1",
+        "name": "Load from File",
+        "filename": "lab2_data.json",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 490,
+        "y": 390,
+        "wires": [
+            [
+                "debug_read"
+            ]
+        ]
+    },
+    {
+        "id": "debug_read",
+        "type": "debug",
+        "z": "0265592cf75c60b1",
+        "name": "Show in Debug",
+        "active": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 390,
+        "wires": []
+    }
+]

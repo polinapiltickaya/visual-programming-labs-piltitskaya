@@ -1,0 +1,69 @@
+[
+    {
+        "id": "df6a2da1ba159c36",
+        "type": "tab",
+        "label": "Поток 12",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "inject_trigger",
+        "type": "inject",
+        "z": "df6a2da1ba159c36",
+        "name": "Send Message",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Hello Context!",
+        "payloadType": "str",
+        "x": 180,
+        "y": 360,
+        "wires": [
+            [
+                "func_context_logic"
+            ]
+        ]
+    },
+    {
+        "id": "func_context_logic",
+        "type": "function",
+        "z": "df6a2da1ba159c36",
+        "name": "Flow Context Logic",
+        "func": "// 1. Читаем текущее значение счетчика из flow-контекста (если его нет, берем 0)\nlet count = flow.get(\"msgCount\") || 0;\n\n// 2. Увеличиваем счетчик на 1\ncount += 1;\n\n// 3. Сохраняем новое значение обратно в flow-контекст\nflow.set(\"msgCount\", count);\n\n// 4. Получаем время последнего вызова\nlet lastTime = flow.get(\"lastAccessTime\") || \"First run\";\nlet currentTime = new Date().toISOString();\n\n// 5. Сохраняем текущее время как последнее\nflow.set(\"lastAccessTime\", currentTime);\n\n// 6. Формируем красивый ответ для отладки\nmsg.payload = {\n    student: \"Piltitskaya\",\n    lab: \"2.12\",\n    messageCounter: count,\n    previousAccessTime: lastTime,\n    currentAccessTime: currentTime\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 360,
+        "wires": [
+            [
+                "debug_context_result"
+            ]
+        ]
+    },
+    {
+        "id": "debug_context_result",
+        "type": "debug",
+        "z": "df6a2da1ba159c36",
+        "name": "Show Context Output",
+        "active": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 360,
+        "wires": []
+    }
+]

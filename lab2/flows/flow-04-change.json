@@ -1,0 +1,97 @@
+[
+    {
+        "id": "364d617cae716ef1",
+        "type": "tab",
+        "label": "Поток 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2d6da4f1ab474010",
+        "type": "inject",
+        "z": "364d617cae716ef1",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 440,
+        "wires": [
+            [
+                "2f9f247f096cb1ee"
+            ]
+        ]
+    },
+    {
+        "id": "2f9f247f096cb1ee",
+        "type": "change",
+        "z": "364d617cae716ef1",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "lab2/piltitskaya/change-demo",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "timestap",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Обновленные данные студента Пильтицкая СДП-ИИ-241",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 440,
+        "wires": [
+            [
+                "c747fc6acd109997"
+            ]
+        ]
+    },
+    {
+        "id": "c747fc6acd109997",
+        "type": "debug",
+        "z": "364d617cae716ef1",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 440,
+        "wires": []
+    }
+]

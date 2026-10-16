@@ -1,0 +1,155 @@
+[
+    {
+        "id": "91d992b8e92c2d83",
+        "type": "tab",
+        "label": "Поток 7",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6fe057eb5b2fe6d4",
+        "type": "http in",
+        "z": "91d992b8e92c2d83",
+        "name": "",
+        "url": "/api/text",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 320,
+        "wires": [
+            [
+                "c0ef77f0fd6d6b16"
+            ]
+        ]
+    },
+    {
+        "id": "c0ef77f0fd6d6b16",
+        "type": "template",
+        "z": "91d992b8e92c2d83",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Привет, это простой текст от Node-RED!",
+        "output": "str",
+        "x": 340,
+        "y": 320,
+        "wires": [
+            [
+                "1f8d26168aad8dbd"
+            ]
+        ]
+    },
+    {
+        "id": "1f8d26168aad8dbd",
+        "type": "http response",
+        "z": "91d992b8e92c2d83",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 570,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "90891467e4051326",
+        "type": "http in",
+        "z": "91d992b8e92c2d83",
+        "name": "",
+        "url": "/api/info",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 440,
+        "wires": [
+            [
+                "379c23533a2971d4"
+            ]
+        ]
+    },
+    {
+        "id": "379c23533a2971d4",
+        "type": "template",
+        "z": "91d992b8e92c2d83",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"student\": \"Пильтицкая\", \"group\": \"СДП-ИИ-241\"}",
+        "output": "json",
+        "x": 360,
+        "y": 440,
+        "wires": [
+            [
+                "184ba8603e3b58cf"
+            ]
+        ]
+    },
+    {
+        "id": "184ba8603e3b58cf",
+        "type": "http response",
+        "z": "91d992b8e92c2d83",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 570,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "952dd7d18e3bc12d",
+        "type": "http in",
+        "z": "91d992b8e92c2d83",
+        "name": "",
+        "url": "/api/items",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 540,
+        "wires": [
+            [
+                "0d23bad2f9f89edf"
+            ]
+        ]
+    },
+    {
+        "id": "0d23bad2f9f89edf",
+        "type": "function",
+        "z": "91d992b8e92c2d83",
+        "name": "function 3",
+        "func": "// Получаем query-параметр id \nlet id = msg.req.query.id;\n\nif (!id) {\n    msg.statusCode = 400;\n    msg.payload = { error: \"Bad Request: missing 'id' parameter\" };\n} else if (id > 10) {\n    msg.statusCode = 404;\n    msg.payload = { error: \"Not Found: item does not exist\" };\n} else {\n    msg.statusCode = 200;\n    msg.payload = { itemId: id, name: \"Товар #\" + id, status: \"available\" };\n}\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 540,
+        "wires": [
+            [
+                "8d8e816265606f3f"
+            ]
+        ]
+    },
+    {
+        "id": "8d8e816265606f3f",
+        "type": "http response",
+        "z": "91d992b8e92c2d83",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 570,
+        "y": 540,
+        "wires": []
+    }
+]

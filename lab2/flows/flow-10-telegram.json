@@ -1,0 +1,230 @@
+[
+    {
+        "id": "e7b8016fd5323543",
+        "type": "tab",
+        "label": "Поток 9",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "telegram_bot_flow_group",
+        "type": "group",
+        "z": "e7b8016fd5323543",
+        "name": "Telegram Bot Lab 2",
+        "style": {
+            "stroke": "#0099cc",
+            "fill": "#e6f5ff",
+            "fill-opacity": "0.3",
+            "label": true
+        },
+        "nodes": [
+            "tg_receiver",
+            "tg_switch",
+            "msg_start",
+            "msg_help",
+            "msg_echo",
+            "tg_sender"
+        ],
+        "x": 194,
+        "y": 319,
+        "w": 932,
+        "h": 202
+    },
+    {
+        "id": "tg_receiver",
+        "type": "telegram receiver",
+        "z": "e7b8016fd5323543",
+        "g": "telegram_bot_flow_group",
+        "name": "TVL Lab2 Piltitskaya",
+        "bot": "7adbce015e49f0ad",
+        "saveDataDir": "",
+        "filterCommands": false,
+        "hasinput": false,
+        "inputs": 0,
+        "handleallupdates": false,
+        "handleprocessupdates": false,
+        "x": 310,
+        "y": 360,
+        "wires": [
+            [
+                "tg_switch"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "tg_switch",
+        "type": "switch",
+        "z": "e7b8016fd5323543",
+        "g": "telegram_bot_flow_group",
+        "name": "Router",
+        "property": "payload.content",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "/start",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "/help",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 550,
+        "y": 420,
+        "wires": [
+            [
+                "msg_start"
+            ],
+            [
+                "msg_help"
+            ],
+            [
+                "msg_echo"
+            ]
+        ]
+    },
+    {
+        "id": "msg_start",
+        "type": "change",
+        "z": "e7b8016fd5323543",
+        "g": "telegram_bot_flow_group",
+        "name": "Answer /start",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.content",
+                "pt": "msg",
+                "to": "Привет! Я бот лабораторной работы №2. Доступные команды: /start, /help",
+                "vt": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 360,
+        "wires": [
+            [
+                "tg_sender"
+            ]
+        ]
+    },
+    {
+        "id": "msg_help",
+        "type": "change",
+        "z": "e7b8016fd5323543",
+        "g": "telegram_bot_flow_group",
+        "name": "Answer /help",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.content",
+                "pt": "msg",
+                "to": "Справка: отправьте любое сообщение, и бот повторит его (эхо-режим). Команда /start запускает бота.",
+                "vt": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 420,
+        "wires": [
+            [
+                "tg_sender"
+            ]
+        ]
+    },
+    {
+        "id": "msg_echo",
+        "type": "change",
+        "z": "e7b8016fd5323543",
+        "g": "telegram_bot_flow_group",
+        "name": "Echo message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.content",
+                "pt": "msg",
+                "to": "payload.content",
+                "vt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 480,
+        "wires": [
+            [
+                "tg_sender"
+            ]
+        ]
+    },
+    {
+        "id": "tg_sender",
+        "type": "telegram sender",
+        "z": "e7b8016fd5323543",
+        "g": "telegram_bot_flow_group",
+        "name": "",
+        "bot": "7adbce015e49f0ad",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1010,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7adbce015e49f0ad",
+        "type": "telegram bot",
+        "botname": "tvl_lab2_piltitskaya_bot",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "testenvironment": false,
+        "updatemode": "polling",
+        "pollinterval": 300,
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": 6667,
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbothost": "0.0.0.0",
+        "localbotport": 8443,
+        "publicbotport": 8443,
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "55759e1ebe0f2f83",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-telegrambot": "19.0.3"
+        }
+    }
+]

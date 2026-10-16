@@ -1,0 +1,20 @@
+[
+    {
+        "id": "3244b12285846afe",
+        "type": "function",
+        "z": "1b10df86822b7fb1",
+        "name": "Save Settings to Flow Context",
+        "func": "// Проверяем, что данные пришли\nif (msg.payload) {\n    // Выводим в лог то, что реально пришло от формы, чтобы проверить структуру\n    node.warn(\"Form payload received: \" + JSON.stringify(msg.payload));\n\n    // Извлекаем значения универсально (поддерживаем разные варианты названий полей)\n    let newTopic = msg.payload.topic || msg.payload['Topic Name'] || msg.payload.customTopic;\n    let newThreshold = msg.payload.threshold || msg.payload['Alarm Threshold'];\n    let newMultiplier = msg.payload.multiplier || msg.payload['Multiplier Factor'];\n\n    // Если значения найдены, сохраняем их в контекст потока\n    if (newTopic !== undefined && newTopic !== \"\") {\n        flow.set(\"customTopic\", String(newTopic));\n    }\n    if (newThreshold !== undefined && !isNaN(Number(newThreshold))) {\n        flow.set(\"threshold\", Number(newThreshold));\n    }\n    if (newMultiplier !== undefined && !isNaN(Number(newMultiplier))) {\n        flow.set(\"multiplier\", Number(newMultiplier));\n    }\n}\n\nmsg.payload = {\n    status: \"Updated successfully!\",\n    currentTopic: flow.get(\"customTopic\"),\n    currentThreshold: flow.get(\"threshold\"),\n    currentMultiplier: flow.get(\"multiplier\")\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    }
+]

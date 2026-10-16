@@ -1,0 +1,124 @@
+[
+    {
+        "id": "8ae814b660597d89",
+        "type": "tab",
+        "label": "Поток 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c8ab39d53de5cda1",
+        "type": "inject",
+        "z": "8ae814b660597d89",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 50,
+        "y": 380,
+        "wires": [
+            [
+                "94ae64ce3056a12d"
+            ]
+        ]
+    },
+    {
+        "id": "94ae64ce3056a12d",
+        "type": "function",
+        "z": "8ae814b660597d89",
+        "name": "function 2",
+        "func": "let inputNumbers = msg.payload;\nif (!Array.isArray(inputNumbers)) {\n    inputNumbers = [50, 60]; // даёт сумму 110 (упадет во второй выход)\n}\n\nlet sum = 0;\nlet evens = [];\n\nfor (let i = 0; i < inputNumbers.length; i++) {\n    let num = inputNumbers[i];\n    sum += num;\n    if (num % 2 === 0) {\n        evens.push(num);\n    }\n}\n\nmsg.payload = {\n    student: \"Пильтицкая СДП-ИИ-241\",\n    totalSum: sum,\n    evenNumbers: evens,\n    count: inputNumbers.length\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 380,
+        "wires": [
+            [
+                "9b81de3268bc89db"
+            ]
+        ]
+    },
+    {
+        "id": "9b81de3268bc89db",
+        "type": "switch",
+        "z": "8ae814b660597d89",
+        "name": "",
+        "property": "payload.totalSum",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lte",
+                "v": "100",
+                "vt": "str"
+            },
+            {
+                "t": "gt",
+                "v": "100",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 470,
+        "y": 380,
+        "wires": [
+            [
+                "7fb750eaeaa16036"
+            ],
+            [
+                "8c68caad4b3408e0"
+            ]
+        ]
+    },
+    {
+        "id": "7fb750eaeaa16036",
+        "type": "debug",
+        "z": "8ae814b660597d89",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "8c68caad4b3408e0",
+        "type": "debug",
+        "z": "8ae814b660597d89",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 420,
+        "wires": []
+    }
+]

@@ -1,0 +1,74 @@
+[
+    {
+        "id": "47a986e0bd5bdcde",
+        "type": "tab",
+        "label": "Поток 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "19c54c7a614ee89e",
+        "type": "inject",
+        "z": "47a986e0bd5bdcde",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{   \"student\": \"Полина\",   \"group\": \"СДП-ИИ-241\",   \"subject\": \"Визуальное программирование\" }",
+        "payloadType": "json",
+        "x": 210,
+        "y": 540,
+        "wires": [
+            [
+                "7bbe9ab1318e5ff8"
+            ]
+        ]
+    },
+    {
+        "id": "7bbe9ab1318e5ff8",
+        "type": "template",
+        "z": "47a986e0bd5bdcde",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n  \"report\": \"Лабораторная работа выполнена успешно\",\n  \"studentName\": \"{{payload.student}}\",\n  \"studyGroup\": \"{{payload.group}}\",\n  \"course\": \"{{payload.subject}}\",\n  \"status\": \"Готово к сдаче\"\n}",
+        "output": "json",
+        "x": 440,
+        "y": 540,
+        "wires": [
+            [
+                "5f3e0d2e2b2fa5a2"
+            ]
+        ]
+    },
+    {
+        "id": "5f3e0d2e2b2fa5a2",
+        "type": "debug",
+        "z": "47a986e0bd5bdcde",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 540,
+        "wires": []
+    }
+]
