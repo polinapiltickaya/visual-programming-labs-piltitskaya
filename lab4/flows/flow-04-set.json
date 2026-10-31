@@ -1,0 +1,101 @@
+{
+  "name": "flow-04-set",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        2256,
+        144
+      ],
+      "id": "fe6ed018-e73e-48ac-a9c9-636e8ea55401",
+      "name": "Manual Trigger"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1b4b3adf-b2f2-4e0a-b1f7-ab8791f2cadf",
+              "name": "topic",
+              "value": "lab4/piltitskaya/timestamp",
+              "type": "string"
+            },
+            {
+              "id": "18ca2af5-8c49-4716-8cc3-cfd3255f6ee1",
+              "name": "timestamp",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "20dce739-bb83-4b85-9ee9-ece59e77950f",
+              "name": "payload",
+              "value": "Piltitskaya Data",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2480,
+        144
+      ],
+      "id": "4b1e1cb4-50e2-47f5-b19f-519e5be61080",
+      "name": "Set"
+    },
+    {
+      "parameters": {
+        "jsCode": "console.log(\"Complete msg object:\", $input.all());\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2704,
+        144
+      ],
+      "id": "5bf0c617-e68d-4645-ac94-3a8fa56f8932",
+      "name": "Code"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "fc94fe0f-ee8b-47c6-bd24-a697ce0f259c",
+  "meta": {
+    "instanceId": "62436641f0ef978ea4299be21725b421cb6b4e097747580df1361ef835dda7a2"
+  },
+  "nodeGroups": [],
+  "id": "tnFbbPVGQw1MUdwi",
+  "tags": []
+}

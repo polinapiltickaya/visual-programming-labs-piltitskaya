@@ -1,0 +1,95 @@
+{
+  "name": "flow-01-manual-set",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        -240
+      ],
+      "id": "803765ca-2f72-477b-b908-e3574729bc5a",
+      "name": "Manual Trigger"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "93c132c9-199a-4ebd-b2b1-dc5fcc8b5d63",
+              "name": "Name",
+              "value": "Пильтицкая",
+              "type": "string"
+            },
+            {
+              "id": "274821f0-b77f-400b-9a7a-314df7bd7ce6",
+              "name": "topic",
+              "value": "lab4/piltitskaya/basic",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        16,
+        -240
+      ],
+      "id": "13d80da3-2d18-4ea6-83c8-1fb471265532",
+      "name": "Set1"
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.all().map(item => {\n  return {\n    json: {\n      ...item.json,\n      debugMessage: \"Данные успешно получены!\",\n      loggedAt: new Date().toISOString()\n    }\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        -240
+      ],
+      "id": "23b348af-3b9c-437c-8ef0-7e2678d44ae9",
+      "name": "Code1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set1": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "ba1c63e1-aa37-4014-92f1-696683a9a9f8",
+  "meta": {
+    "instanceId": "62436641f0ef978ea4299be21725b421cb6b4e097747580df1361ef835dda7a2"
+  },
+  "nodeGroups": [],
+  "id": "XXNrIlXaHNui2Y0u",
+  "tags": []
+}

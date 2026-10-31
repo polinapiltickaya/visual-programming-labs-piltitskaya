@@ -1,0 +1,139 @@
+{
+  "name": "flow-03-if",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "63dc096c-90a4-4981-affd-0f085bfbc783",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        80
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "5955765b-480a-47b8-86cb-058e36b530b3",
+      "name": "NoOp true high",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1824,
+        -32
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "d9ddedfd-f1f9-4987-8c85-762e73f95d1d",
+      "name": "NoOp false low",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1824,
+        192
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const student = { surname: 'Пильтицкая', group: 'СДП-ИИ-241' };\nconst samples = [[10, 15, 10], [2, 15, 10]];\nconst result = [];\nfor (const values of samples) {\n  let total = 0;\n  for (const value of values) { total += value; }\n  let level;\n  if (total >= 30) { level = 'high'; } else { level = 'low'; }\n  result.push({ json: { payload: { ...student, values, total, level } } });\n}\nreturn result;"
+      },
+      "id": "da7cc286-3344-4830-94dd-cd79f1a810b5",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1312,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8469da33-acab-42a8-818d-3bcc25231bbd",
+              "leftValue": "={{ $json.payload.total }}",
+              "rightValue": 20,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "5f13fb9d-918e-4224-a3c6-a8960e86c318",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1568,
+        80
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "NoOp true high",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "NoOp false low",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "da2ac3df-3476-4733-8605-918882b36027",
+  "meta": {
+    "instanceId": "62436641f0ef978ea4299be21725b421cb6b4e097747580df1361ef835dda7a2"
+  },
+  "nodeGroups": [],
+  "id": "tnFbbPVGQw1MUdwi",
+  "tags": []
+}

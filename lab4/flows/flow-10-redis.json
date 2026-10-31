@@ -1,0 +1,120 @@
+{
+  "name": "flow-10-redis",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "a3fe8b29-99d4-4334-a2a2-20b2324ec7bf",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        5600,
+        880
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "piltitskaya"
+      },
+      "id": "f623bf19-a301-45a8-a618-b7acb929bc2f",
+      "name": "Redis Delete piltitskaya",
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        5824,
+        880
+      ],
+      "credentials": {
+        "redis": {
+          "id": "yHJj53kf6C0TC9aW",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "value",
+        "key": "piltitskaya",
+        "keyType": "string",
+        "options": {}
+      },
+      "id": "13eea5d9-3d57-45b5-981c-ece6f49d6be8",
+      "name": "Redis Get после удаления",
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        6048,
+        880
+      ],
+      "credentials": {
+        "redis": {
+          "id": "yHJj53kf6C0TC9aW",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const value = $input.first().json.value;\nif (value !== null) throw new Error('Ключ piltitskaya ещё существует');\nreturn [{ json: { student: 'Пильтицкая', group: 'СДП-ИИ-241', key: 'piltitskaya', value, exists: false, deleted: true } }];"
+      },
+      "id": "69c013d7-2a71-432c-818c-f561b80225fb",
+      "name": "Code проверка отсутствия",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        6288,
+        880
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Redis Delete piltitskaya",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis Delete piltitskaya": {
+      "main": [
+        [
+          {
+            "node": "Redis Get после удаления",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis Get после удаления": {
+      "main": [
+        [
+          {
+            "node": "Code проверка отсутствия",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "75558c1f-1729-427c-8421-a1862fb6e6bc",
+  "meta": {
+    "instanceId": "62436641f0ef978ea4299be21725b421cb6b4e097747580df1361ef835dda7a2"
+  },
+  "nodeGroups": [],
+  "id": "tnFbbPVGQw1MUdwi",
+  "tags": []
+}

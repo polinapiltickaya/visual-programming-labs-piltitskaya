@@ -1,0 +1,80 @@
+{
+  "name": "flow-05-http",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        2976,
+        320
+      ],
+      "id": "57b370a0-22f5-4dc4-8747-1e37b0bc7bae",
+      "name": "Manual Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://api.chucknorris.io/jokes/random",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3200,
+        320
+      ],
+      "id": "83633c55-915e-4dd6-9e9c-6e2a1cccd139",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "jsCode": "const joke = $input.item.json.value;\nreturn [{ json: { joke, author: \"piltitskaya\" } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3424,
+        320
+      ],
+      "id": "04d70b1d-3344-470d-b5a2-d7c3d862f45d",
+      "name": "Code"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "9aea432d-241c-4e1f-b2dc-43dd54556ab5",
+  "meta": {
+    "instanceId": "62436641f0ef978ea4299be21725b421cb6b4e097747580df1361ef835dda7a2"
+  },
+  "nodeGroups": [],
+  "id": "tnFbbPVGQw1MUdwi",
+  "tags": []
+}
